@@ -1,0 +1,26 @@
+.TextField {
+    margin-bottom: 20px;
+}
+.TextField-label {
+    display: flex;
+    font-size: 16px;
+    line-height: 20px;
+    margin-bottom: 5px;
+}
+.TextField-input {
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    font-size: 18px;
+    line-height: 30px;
+    padding: 5px 10px;
+    width: 460px;
+    height: 40px;
+}
+.TextField-input:hover {
+    border: 1px solid rgba(0, 0, 0, 0.4);
+}
+.TextField-input:focus {
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    outline: 2px solid rgba(0, 0, 0, 0.2);
+}
