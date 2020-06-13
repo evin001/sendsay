@@ -5,11 +5,14 @@ import './TextField.css'
 
 const classes = cn('TextField')
 
-const TextField = ({ label, name, type }) => (
+const TextField = ({ label, name, type, optional }) => (
   <div className={classes()}>
-    <label className={classes('label')} htmlFor={name}>
-      {label}
-    </label>
+    <div className={classes('label-container')}>
+      <label className={classes('label')} htmlFor={name}>
+        {label}
+      </label>
+      {optional && <small className={classes('optional')}>Опционально</small>}
+    </div>
     <input className={classes('input')} id={name} type={type} />
   </div>
 )

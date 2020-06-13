@@ -1,19 +1,30 @@
 import React from 'react'
 import { cn } from '@bem-react/classname'
-import TextField from '~/common/components/TextField'
-import SingInButton from './SingInButton'
+import TextField from '~/components/TextField'
+import Button from '~/components/Button'
+import Logo from '~/components/Logo'
 import './AuthPage.css'
 
 const classes = cn('AuthPage')
 
 const AuthPage = () => (
-  <div className={classes()}>
-    <div className={classes('container')}>
-      <div className={classes('title')}>API-консолька</div>
-      <TextField label="Логин" name="login" />
-      <TextField label="Сублогин" name="sublogin" />
-      <TextField label="Пароль" name="password" />
-      <SingInButton />
+  <div className={classes('root')}>
+    <div>
+      <div className={classes({ text: 'center' })}>
+        <Logo />
+      </div>
+      <div className={classes('form-container')}>
+        <div className={classes('title')}>API-консолька</div>
+        <TextField label="Логин" name="login" />
+        <TextField label="Сублогин" name="sublogin" optional />
+        <TextField label="Пароль" name="password" type="password" />
+        <Button label="Войти" />
+      </div>
+      <div className={classes({ text: 'center' })}>
+        <a href="#" className={classes('repo-link')}>
+          @link-to-your-github
+        </a>
+      </div>
     </div>
   </div>
 )
