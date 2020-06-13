@@ -1,0 +1,35 @@
+.Loader path {
+    animation: Loader-spinner 0.8s linear infinite;
+}
+.Loader path:nth-child(1) {
+    animation-delay: -0.7s;
+}
+.Loader path:nth-child(2) {
+    animation-delay: -0.6s;
+}
+.Loader path:nth-child(3) {
+    animation-delay: -0.5s;
+}
+.Loader path:nth-child(4) {
+    animation-delay: -0.4s;
+}
+.Loader path:nth-child(5) {
+    animation-delay: -0.3s;
+}
+.Loader path:nth-child(6) {
+    animation-delay: -0.2s;
+}
+.Loader path:nth-child(7) {
+    animation-delay: -0.1s;
+}
+.Loader path:nth-child(8) {
+    animation-delay: 0s;
+}
+@keyframes Loader-spinner {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}

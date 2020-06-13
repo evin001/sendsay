@@ -27,4 +27,5 @@ html, body, #app {
 }
 :root {
     --main-border-radius: 5px;
+    --color-outline: #45A5FF;
 }

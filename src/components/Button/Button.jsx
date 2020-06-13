@@ -5,12 +5,13 @@ import './Button.css'
 
 const classes = cn('Button')
 
-const Button = ({ label, disabled }) => (
-  <button className={classes({ disabled, active: !disabled })}>{label}</button>
+const Button = ({ children, disabled }) => (
+  <button className={classes({ disabled, active: !disabled })}>
+    {children}
+  </button>
 )
 
 Button.propTypes = {
-  label: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
 }
 
