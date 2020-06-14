@@ -1,0 +1,15 @@
+.FullscreenButton-root {
+    cursor: pointer;
+    padding: 7px;
+    line-height: 0;
+}
+.FullscreenButton-root:focus {
+    outline-color: var(--color-focus);
+}
+.FullscreenButton-root:hover path {
+    stroke: #0055FB;
+}
+.FullscreenButton-root svg {
+    width: 18px;
+    height: 18px;
+}
