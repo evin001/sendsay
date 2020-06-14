@@ -14,7 +14,10 @@
     "semi": ["error", "never"],
     "no-unused-vars": "warn",
     "indent": ["error", 2],
-    "require-jsdoc": "off"
+    "require-jsdoc": "off",
+    "react/prop-types": ["warn", {
+      "ignore": ["children"]
+    }]
   },
   "ignorePatterns": ["webpack.config.js"],
   "parser": "babel-eslint"

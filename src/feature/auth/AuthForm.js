@@ -13,7 +13,12 @@ class AuthForm {
   }
 
   get error() {
-    return this.login.error || this.sublogin.error || this.password.error
+    return (
+      this.login.error ||
+      this.sublogin.error ||
+      this.password.error ||
+      !(this.login.value && this.password.value)
+    )
   }
 
   clone() {

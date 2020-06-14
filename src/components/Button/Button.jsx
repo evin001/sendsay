@@ -5,14 +5,18 @@ import './Button.css'
 
 const classes = cn('Button')
 
-const Button = ({ children, disabled }) => (
-  <button className={classes({ disabled, active: !disabled })}>
+const Button = ({ children, disabled, onClick }) => (
+  <button
+    className={classes({ disabled, active: !disabled })}
+    onClick={onClick}
+  >
     {children}
   </button>
 )
 
 Button.propTypes = {
   disabled: PropTypes.bool,
+  onClick: PropTypes.func,
 }
 
 Button.defaultProps = {

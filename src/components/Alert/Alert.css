@@ -1,0 +1,24 @@
+.Alert-root {
+    display: flex;
+    border-radius: var(--main-border-radius);
+    background: rgba(207, 44, 0, 0.1);
+    padding: 10px;
+    margin-bottom: 20px;
+}
+.Alert-container {
+    margin-left: 10px;
+}
+.Alert-title {
+    color: var(--color-error);
+    font-size: 18px;
+    line-height: 30px;
+}
+.Alert-description {
+    color: var(--color-error);
+    opacity: 0.5;
+    font-size: 12px;
+    line-height: 20px;
+}
+.Alert-icon {
+    margin-top: 5px;
+}

@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
 import { cn } from '@bem-react/classname'
+import { useDispatch, useSelector } from 'react-redux'
+import { signIn } from './authSlice'
 import TextField from '~/components/TextField'
 import Button from '~/components/Button'
 import Logo from '~/components/Logo'
+import Alert from '~/components/Alert'
 import AuthForm from './AuthForm'
 import './AuthPage.css'
 
@@ -10,10 +13,25 @@ const classes = cn('AuthPage')
 
 const AuthPage = () => {
   const [form, setForm] = useState(new AuthForm())
+  const dispatch = useDispatch()
+  const { error } = useSelector((store) => ({
+    error: store.auth.error,
+  }))
+
   const handleChangeForm = (event) => {
     const nextForm = form.clone()
     nextForm[event.target.id].value = event.target.value
     setForm(nextForm)
+  }
+
+  const handleSignIn = () => {
+    dispatch(
+      signIn({
+        login: form.login.value,
+        sublogin: form.sublogin.value,
+        password: form.password.value,
+      })
+    )
   }
 
   return (
@@ -24,6 +42,9 @@ const AuthPage = () => {
         </div>
         <div className={classes('form-container')}>
           <div className={classes('title')}>API-консолька</div>
+          {error && (
+            <Alert description={JSON.stringify(error)} title="Вход не вышел" />
+          )}
           <TextField
             label="Логин"
             name="login"
@@ -47,7 +68,9 @@ const AuthPage = () => {
             error={form.password.error}
             onChange={handleChangeForm}
           />
-          <Button disabled={form.error}>Войти</Button>
+          <Button disabled={form.error} onClick={handleSignIn}>
+            Войти
+          </Button>
         </div>
         <div className={classes({ text: 'center' })}>
           <a href="#" className={classes('repo-link')}>
