@@ -28,7 +28,9 @@ html, body, #app {
 :root {
     --main-border-radius: 5px;
     --color-focus: #45A5FF;
+    --color-select: #0055FB;
     --color-error: #CF2C00;
+    --color-success: #30B800;
     --color-toolbar: #F6F6F6;
     --color-divider: rgba(0, 0, 0, 0.2);
 }
