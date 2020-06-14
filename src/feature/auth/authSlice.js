@@ -1,22 +1,31 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import Sendsay from 'sendsay-api'
+import StoreProvider from '~/providers/StoreProvider'
 
 const thunkPrefix = `auth`
-const senday = new Sendsay()
+const sendsay = new Sendsay()
 
 export const signIn = createAsyncThunk(
   `${thunkPrefix}/signIn`,
   async ({ login, sublogin, password }, { rejectWithValue }) => {
     try {
-      return await senday.login({ login, sublogin, password })
+      await sendsay.login({ login, sublogin, password })
+      StoreProvider.setSession(sendsay.session)
+      return sendsay.session
     } catch (err) {
-      return rejectWithValue(err)
+      console.log(err)
+      return rejectWithValue({
+        id: err.id,
+        explain: err.explain,
+      })
     }
   }
 )
 
 const initialState = {
   error: null,
+  loading: false,
+  session: StoreProvider.getSession(),
 }
 
 const authSlice = createSlice({
@@ -25,13 +34,16 @@ const authSlice = createSlice({
   reducers: {},
   extraReducers: {
     [signIn.fulfilled]: (state, action) => {
-      console.log(action)
+      state.session = action.payload
+      state.loading = false
     },
     [signIn.rejected]: (state, action) => {
-      state.error = { id: action.payload.id, explain: action.payload.explain }
+      state.error = action.payload
+      state.loading = false
     },
-    [signIn.pending]: (state, action) => {
-      console.log(action)
+    [signIn.pending]: (state) => {
+      state.loading = true
+      state.error = null
     },
   },
 })

@@ -6,6 +6,7 @@ import TextField from '~/components/TextField'
 import Button from '~/components/Button'
 import Logo from '~/components/Logo'
 import Alert from '~/components/Alert'
+import Loader from '~/components/Loader'
 import AuthForm from './AuthForm'
 import './AuthPage.css'
 
@@ -14,8 +15,9 @@ const classes = cn('AuthPage')
 const AuthPage = () => {
   const [form, setForm] = useState(new AuthForm())
   const dispatch = useDispatch()
-  const { error } = useSelector((store) => ({
+  const { error, loading } = useSelector((store) => ({
     error: store.auth.error,
+    loading: store.auth.loading,
   }))
 
   const handleChangeForm = (event) => {
@@ -25,13 +27,15 @@ const AuthPage = () => {
   }
 
   const handleSignIn = () => {
-    dispatch(
-      signIn({
-        login: form.login.value,
-        sublogin: form.sublogin.value,
-        password: form.password.value,
-      })
-    )
+    if (!loading) {
+      dispatch(
+        signIn({
+          login: form.login.value,
+          sublogin: form.sublogin.value,
+          password: form.password.value,
+        })
+      )
+    }
   }
 
   return (
@@ -69,7 +73,7 @@ const AuthPage = () => {
             onChange={handleChangeForm}
           />
           <Button disabled={form.error} onClick={handleSignIn}>
-            Войти
+            {loading ? <Loader /> : 'Войти'}
           </Button>
         </div>
         <div className={classes({ text: 'center' })}>
