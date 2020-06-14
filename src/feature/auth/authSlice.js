@@ -3,7 +3,11 @@ import Sendsay from 'sendsay-api'
 import StoreProvider from '~/providers/StoreProvider'
 
 const thunkPrefix = `auth`
+
 const sendsay = new Sendsay()
+if (StoreProvider.getSession()) {
+  sendsay.setSession(StoreProvider.getSession())
+}
 
 export const signIn = createAsyncThunk(
   `${thunkPrefix}/signIn`,
@@ -30,10 +34,23 @@ export const logout = createAsyncThunk(`${thunkPrefix}/logout`, async () => {
   }
 })
 
+export const pingPong = createAsyncThunk(
+  `${thunkPrefix}/pingPong`,
+  async () => {
+    const res = await sendsay.request({ action: 'pong' })
+    return {
+      account: res.account,
+      sublogin: res.sublogin,
+    }
+  }
+)
+
 const initialState = {
   error: null,
   loading: false,
   session: StoreProvider.getSession(),
+  account: '',
+  sublogin: '',
 }
 
 const authSlice = createSlice({
@@ -60,6 +77,11 @@ const authSlice = createSlice({
     },
     [logout.rejected]: (state) => {
       state.session = ''
+    },
+    // PingPong
+    [pingPong.fulfilled]: (state, action) => {
+      state.account = action.payload.account
+      state.sublogin = action.payload.sublogin
     },
   },
 })

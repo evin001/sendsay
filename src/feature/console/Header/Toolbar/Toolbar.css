@@ -1,12 +1,12 @@
 .Toolbar-root {
     display: flex;
     align-items: center;
-    border: 1px solid rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--color-divider);
     border-radius: var(--main-border-radius);
     height: 30px;
     padding: 5px 15px;
 }
 .Toolbar-divider {
     margin: 0 5px;
-    color: rgba(0, 0, 0, 0.2);
+    color: var(--color-divider);
 }

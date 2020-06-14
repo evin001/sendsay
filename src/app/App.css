@@ -30,4 +30,5 @@ html, body, #app {
     --color-focus: #45A5FF;
     --color-error: #CF2C00;
     --color-toolbar: #F6F6F6;
+    --color-divider: rgba(0, 0, 0, 0.2);
 }
