@@ -27,5 +27,6 @@ html, body, #app {
 }
 :root {
     --main-border-radius: 5px;
-    --color-outline: #45A5FF;
+    --color-focus: #45A5FF;
+    --color-error: #CF2C00;
 }

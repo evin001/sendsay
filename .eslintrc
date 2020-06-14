@@ -13,7 +13,8 @@
     "object-curly-spacing": ["error", "always"],
     "semi": ["error", "never"],
     "no-unused-vars": "warn",
-    "indent": ["error", 2]
+    "indent": ["error", 2],
+    "require-jsdoc": "off"
   },
   "ignorePatterns": ["webpack.config.js"],
   "parser": "babel-eslint"

@@ -6,6 +6,9 @@
     font-size: 16px;
     line-height: 20px;
 }
+.TextField-label_error {
+    color: var(--color-error)
+}
 .TextField-input {
     background: white;
     border: 1px solid rgba(0, 0, 0, 0.2);
@@ -21,8 +24,12 @@
 }
 .TextField-input:focus {
     border: 1px solid rgba(0, 0, 0, 0.4);
-    outline: none;
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+    outline: none;
+}
+.TextField-input_error {
+    border: 1px solid var(--color-error) !important;
+    box-shadow: 0 0 5px rgba(207, 44, 0, 0.5) !important;
 }
 .TextField-optional {
     font-size: 12px;

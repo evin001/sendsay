@@ -22,7 +22,7 @@
     line-height: 20px;
 }
 .AuthPage-repo-link:focus {
-    outline-color: var(--color-outline);
+    outline-color: var(--color-focus);
 }
 .AuthPage-link-container {
     text-align: center;
