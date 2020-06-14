@@ -1,0 +1,9 @@
+.LogoutButton-root {
+    display: flex;
+    align-items: center;
+    margin: 0 30px;
+    cursor: pointer;
+}
+.LogoutButton-label {
+    margin-right: 10px;
+}

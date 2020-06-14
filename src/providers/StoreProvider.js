@@ -10,6 +10,10 @@ class StoreProvider {
   static setSession(value) {
     session.write(SESSION_KEY, value)
   }
+
+  static resetSession() {
+    session.remove(SESSION_KEY)
+  }
 }
 
 export default StoreProvider

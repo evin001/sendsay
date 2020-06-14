@@ -17,6 +17,7 @@
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",
     "redux": "^4.0.5",
+    "screenfull": "^5.0.2",
     "sendsay-api": "^2.4.0",
     "store": "^2.0.12",
     "validator": "^13.1.1"

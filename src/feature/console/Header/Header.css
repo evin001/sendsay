@@ -1,0 +1,18 @@
+.Header-root {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 50px;
+    background-color: var(--color-toolbar);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    padding: 10px 15px;
+}
+.Header-container {
+    display: flex;
+    align-items: center;
+}
+.Header-label {
+    font-size: 20px;
+    line-height: 30px;
+    margin-left: 20px;
+}
