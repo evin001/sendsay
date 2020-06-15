@@ -1,6 +1,7 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { cn } from '@bem-react/classname'
+import { useDidMount } from 'beautiful-react-hooks'
 import DotsIcon from '../icons/DotsIcon'
 import ItemPortal from './ItemPortal'
 import './Dropdown.css'
@@ -12,6 +13,22 @@ const Dropdown = ({ title, type }) => {
   const root = useRef()
 
   const handleToggle = () => setOpen(!open)
+  const handleScroll = () => {
+    if (open) {
+      setOpen(false)
+    }
+  }
+
+  useEffect(() => {
+    if (root.current) {
+      root.current.parentNode.addEventListener('scroll', handleScroll)
+    }
+    return () => {
+      if (root.current) {
+        root.current.parentNode.removeEventListener('scroll', handleScroll)
+      }
+    }
+  })
 
   return (
     <div className={classes('root', { shadow: open })} ref={root}>
