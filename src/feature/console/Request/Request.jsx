@@ -1,5 +1,6 @@
 import React, { useRef } from 'react'
 import { cn } from '@bem-react/classname'
+import classNames from 'classnames'
 import TextField from '~/components/TextField'
 import Splitter from './Splitter'
 import './Request.css'
@@ -11,8 +12,8 @@ const Request = () => {
   const firstPane = useRef()
   const secondPane = useRef()
 
-  const handleDrag = (x) => {
-    const parentWidth = root.current.offsetWidth
+  const handleDrag = (x, splitterWidth) => {
+    const parentWidth = root.current.offsetWidth - splitterWidth
     const firstPercent = (x * 100) / parentWidth
 
     if (firstPercent > 10 && firstPercent < 90) {
@@ -31,7 +32,10 @@ const Request = () => {
         tagClassName={classes('text-field')}
         labelClassName={classes('label')}
         labelContainerClassName={classes('label-container')}
-        rootClassName={classes('text-field-root')}
+        rootClassName={classNames(
+          classes('text-field-root'),
+          classes('first-pane')
+        )}
         multiline
       />
       <Splitter onDrag={handleDrag} />
@@ -43,7 +47,10 @@ const Request = () => {
         tagClassName={classes('text-field')}
         labelClassName={classes('label')}
         labelContainerClassName={classes('label-container')}
-        rootClassName={classes('text-field-root')}
+        rootClassName={classNames(
+          classes('text-field-root'),
+          classes('second-pane')
+        )}
         multiline
       />
     </div>

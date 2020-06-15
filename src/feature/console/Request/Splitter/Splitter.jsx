@@ -18,7 +18,8 @@ const Splitter = ({ onDrag }) => {
 
   onMouseMove((event) => {
     if (resize) {
-      onDrag(event.x)
+      const splitterWidth = root.current.offsetWidth
+      onDrag(event.x - splitterWidth / 2, splitterWidth)
     }
   })
 
