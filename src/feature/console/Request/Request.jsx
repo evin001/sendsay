@@ -1,7 +1,9 @@
 import React, { useRef } from 'react'
 import { cn } from '@bem-react/classname'
+import { useDidMount } from 'beautiful-react-hooks'
 import classNames from 'classnames'
 import TextField from '~/components/TextField'
+import StoreProvider from '~/providers/StoreProvider'
 import Splitter from './Splitter'
 import './Request.css'
 
@@ -12,13 +14,29 @@ const Request = () => {
   const firstPane = useRef()
   const secondPane = useRef()
 
+  const updatePercentage = (first, second) => {
+    firstPane.current.style = `width: ${first}%`
+    secondPane.current.style = `width: ${second}%`
+  }
+
+  useDidMount(() => {
+    const percents = StoreProvider.getAspectRatio()
+    if (percents) {
+      updatePercentage(percents.first, percents.second)
+    }
+  })
+
   const handleDrag = (x, splitterWidth) => {
     const parentWidth = root.current.offsetWidth - splitterWidth
     const firstPercent = (x * 100) / parentWidth
+    const secondPercent = 100 - firstPercent
 
     if (firstPercent > 10 && firstPercent < 90) {
-      firstPane.current.style = `width: ${firstPercent}%`
-      secondPane.current.style = `width: ${100 - firstPercent}%`
+      updatePercentage(firstPercent, secondPercent)
+      StoreProvider.setAspectRatio({
+        first: firstPercent,
+        second: secondPercent,
+      })
     }
   }
 

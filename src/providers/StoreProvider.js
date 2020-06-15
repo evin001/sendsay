@@ -1,18 +1,14 @@
-import session from 'store/storages/sessionStorage'
+import store from 'store'
 
-const SESSION_KEY = 'session'
+const ASPECT_RATIO = 'aspect-ratio'
 
 class StoreProvider {
-  static getSession() {
-    return session.read(SESSION_KEY) || ''
+  static getAspectRatio() {
+    return store.get(ASPECT_RATIO)
   }
 
-  static setSession(value) {
-    session.write(SESSION_KEY, value)
-  }
-
-  static resetSession() {
-    session.remove(SESSION_KEY)
+  static setAspectRatio(value) {
+    store.set(ASPECT_RATIO, value)
   }
 }
 

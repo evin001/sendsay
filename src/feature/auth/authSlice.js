@@ -1,12 +1,12 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import Sendsay from 'sendsay-api'
-import StoreProvider from '~/providers/StoreProvider'
+import SessionProvider from '~/providers/SessionProvider'
 
 const thunkPrefix = `auth`
 
 const sendsay = new Sendsay()
-if (StoreProvider.getSession()) {
-  sendsay.setSession(StoreProvider.getSession())
+if (SessionProvider.getSession()) {
+  sendsay.setSession(SessionProvider.getSession())
 }
 
 export const signIn = createAsyncThunk(
@@ -14,7 +14,7 @@ export const signIn = createAsyncThunk(
   async ({ login, sublogin, password }, { rejectWithValue }) => {
     try {
       await sendsay.login({ login, sublogin, password })
-      StoreProvider.setSession(sendsay.session)
+      SessionProvider.setSession(sendsay.session)
       return sendsay.session
     } catch (err) {
       return rejectWithValue(
@@ -30,7 +30,7 @@ export const logout = createAsyncThunk(`${thunkPrefix}/logout`, async () => {
   } catch (err) {
     throw err
   } finally {
-    StoreProvider.resetSession()
+    SessionProvider.resetSession()
   }
 })
 
@@ -48,7 +48,7 @@ export const pingPong = createAsyncThunk(
 const initialState = {
   error: null,
   loading: false,
-  session: StoreProvider.getSession(),
+  session: SessionProvider.getSession(),
   account: '',
   sublogin: '',
 }
