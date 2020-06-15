@@ -1,0 +1,21 @@
+.Request-root {
+    display: flex;
+    padding: 10px 15px 15px;
+    border-bottom: 1px solid var(--color-divider);
+    flex: 1;
+}
+.Request-text-field {
+    width: 100%;
+    flex: 1;
+}
+.Request-label {
+    font-size: 12px;
+    line-height: 20px;
+    color: #999999;
+}
+.Request-label-container {
+    margin-bottom: 3px;
+}
+.Request-divider {
+    width: 10px;
+}

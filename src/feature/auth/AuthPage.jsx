@@ -55,6 +55,7 @@ const AuthPage = () => {
             value={form.login.value}
             error={form.login.error}
             onChange={handleChangeForm}
+            tagClassName={classes('text-field')}
           />
           <TextField
             label="Сублогин"
@@ -63,6 +64,7 @@ const AuthPage = () => {
             value={form.sublogin.value}
             error={form.sublogin.error}
             onChange={handleChangeForm}
+            tagClassName={classes('text-field')}
           />
           <TextField
             label="Пароль"
@@ -71,6 +73,7 @@ const AuthPage = () => {
             value={form.password.value}
             error={form.password.error}
             onChange={handleChangeForm}
+            tagClassName={classes('text-field')}
           />
           <Button disabled={form.error} onClick={handleSignIn}>
             {loading ? <Loader /> : 'Войти'}

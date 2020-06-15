@@ -30,3 +30,6 @@
 .AuthPage_text_center {
     text-align: center;
 }
+.AuthPage-text-field {
+    width: 460px;
+}
