@@ -20,7 +20,9 @@ const Dropdown = ({ title, type }) => {
       <div className={classes('dots-container')} onClick={handleToggle}>
         <DotsIcon />
       </div>
-      {open && <ItemPortal parent={root.current} />}
+      {open && (
+        <ItemPortal parent={root.current} onClickOutside={handleToggle} />
+      )}
     </div>
   )
 }

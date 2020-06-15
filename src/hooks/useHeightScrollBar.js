@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import { useDidMount } from 'beautiful-react-hooks'
+import { useState } from 'react'
+import { useDidMount, useWindowResize } from 'beautiful-react-hooks'
 
 const useHeightScrollBar = (ref) => {
   const [height, setHeight] = useState({ value: 0, init: 0 })
@@ -35,12 +35,7 @@ const useHeightScrollBar = (ref) => {
     }
   })
 
-  useEffect(() => {
-    window.addEventListener('resize', handleWindowResize)
-    return () => {
-      window.removeEventListener('resize', handleWindowResize)
-    }
-  })
+  useWindowResize(handleWindowResize)
 
   return height.value
 }
