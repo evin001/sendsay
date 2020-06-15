@@ -13,7 +13,7 @@ const useHeightScrollBar = (ref) => {
         nextHeight = { ...height, value: 0 }
       } else if (el.offsetHeight !== el.clientHeight) {
         if (height.init) {
-          nextHeight = { value: height.init, ...height }
+          nextHeight = { ...height, value: height.init }
         } else {
           nextHeight = { value: getHeight(el), init: getHeight(el) }
         }
