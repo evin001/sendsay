@@ -16,20 +16,12 @@
     line-height: 30px;
     margin-bottom: 20px;
 }
-.AuthPage-repo-link {
-    color: #999999;
-    font-size: 16px;
-    line-height: 20px;
-}
-.AuthPage-repo-link:focus {
-    outline-color: var(--color-focus);
-}
 .AuthPage-link-container {
-    text-align: center;
-}
-.AuthPage_text_center {
     text-align: center;
 }
 .AuthPage-text-field {
     width: 460px;
+}
+.AuthPage-sign-in-button {
+    width: 110px;
 }

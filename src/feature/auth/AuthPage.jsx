@@ -7,10 +7,12 @@ import Button from '~/components/Button'
 import Logo from '~/components/Logo'
 import Alert from '~/components/Alert'
 import Loader from '~/components/Loader'
+import Repo from '~/components/Repo'
 import AuthForm from './AuthForm'
 import './AuthPage.css'
 
 const classes = cn('AuthPage')
+const appClasses = cn('App')
 
 const AuthPage = () => {
   const [form, setForm] = useState(new AuthForm())
@@ -41,7 +43,7 @@ const AuthPage = () => {
   return (
     <div className={classes('root')}>
       <div>
-        <div className={classes({ text: 'center' })}>
+        <div className={appClasses({ text: 'center' })}>
           <Logo />
         </div>
         <div className={classes('form-container')}>
@@ -75,15 +77,15 @@ const AuthPage = () => {
             onChange={handleChangeForm}
             tagClassName={classes('text-field')}
           />
-          <Button disabled={form.error} onClick={handleSignIn}>
+          <Button
+            disabled={form.error}
+            onClick={handleSignIn}
+            className={classes('sign-in-button')}
+          >
             {loading ? <Loader /> : 'Войти'}
           </Button>
         </div>
-        <div className={classes({ text: 'center' })}>
-          <a href="#" className={classes('repo-link')}>
-            @link-to-your-github
-          </a>
-        </div>
+        <Repo />
       </div>
     </div>
   )

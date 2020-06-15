@@ -1,13 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { cn } from '@bem-react/classname'
+import classNames from 'classnames'
 import './Button.css'
 
 const classes = cn('Button')
 
-const Button = ({ children, disabled, onClick }) => (
+const Button = ({ children, disabled, className, onClick }) => (
   <button
-    className={classes({ disabled, active: !disabled })}
+    className={classNames(classes({ disabled, active: !disabled }), className)}
     onClick={onClick}
   >
     {children}
@@ -16,6 +17,7 @@ const Button = ({ children, disabled, onClick }) => (
 
 Button.propTypes = {
   disabled: PropTypes.bool,
+  className: PropTypes.string,
   onClick: PropTypes.func,
 }
 

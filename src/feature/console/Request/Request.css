@@ -5,8 +5,10 @@
     flex: 1;
 }
 .Request-text-field {
-    width: 100%;
     flex: 1;
+    width: 100%;
+    /* min-width: 640px;
+    min-height: 520px; */
 }
 .Request-label {
     font-size: 12px;
@@ -17,5 +19,6 @@
     margin-bottom: 3px;
 }
 .Request-divider {
+    flex-shrink: 0;
     width: 10px;
 }
