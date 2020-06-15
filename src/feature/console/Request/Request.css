@@ -18,7 +18,8 @@
 .Request-label-container {
     margin-bottom: 3px;
 }
-.Request-divider {
-    flex-shrink: 0;
-    width: 10px;
+.Request-text-field-root {
+    display: flex;
+    flex-flow: column;
+    width: 50%;
 }

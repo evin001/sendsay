@@ -14,15 +14,15 @@ const TextField = ({
   optional,
   error,
   multiline,
-  fullWidth,
   tagClassName,
   labelClassName,
   labelContainerClassName,
+  rootClassName,
   onChange,
 }) => {
   const Tag = multiline ? 'textarea' : 'input'
   return (
-    <div className={classes({ 'full-width': fullWidth })}>
+    <div className={rootClassName}>
       <div
         className={classNames(
           classes('label-container'),
@@ -60,10 +60,10 @@ TextField.propTypes = {
   tagClassName: PropTypes.string,
   labelClassName: PropTypes.string,
   labelContainerClassName: PropTypes.string,
+  rootClassName: PropTypes.string,
   optional: PropTypes.bool,
   error: PropTypes.bool,
   multiline: PropTypes.bool,
-  fullWidth: PropTypes.bool,
   onChange: PropTypes.func,
 }
 
@@ -72,7 +72,6 @@ TextField.defaultProps = {
   optional: false,
   error: false,
   multiline: false,
-  fullWidth: false,
 }
 
 export default TextField

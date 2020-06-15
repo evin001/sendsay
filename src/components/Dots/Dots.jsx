@@ -1,6 +1,6 @@
 import React from 'react'
 
-const DotsIcon = () => (
+const Dots = () => (
   <svg
     width="4"
     height="18"
@@ -14,4 +14,4 @@ const DotsIcon = () => (
   </svg>
 )
 
-export default DotsIcon
+export default Dots

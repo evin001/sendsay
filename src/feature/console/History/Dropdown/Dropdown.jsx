@@ -1,8 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { cn } from '@bem-react/classname'
-import { useDidMount } from 'beautiful-react-hooks'
-import DotsIcon from '../icons/DotsIcon'
+import DotsIcon from '~/components/Dots'
 import ItemPortal from './ItemPortal'
 import './Dropdown.css'
 
