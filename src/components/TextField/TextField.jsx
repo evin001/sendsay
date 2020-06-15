@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import { cn } from '@bem-react/classname'
 import classNames from 'classnames'
@@ -19,10 +19,11 @@ const TextField = ({
   labelContainerClassName,
   rootClassName,
   onChange,
+  componentRef,
 }) => {
   const Tag = multiline ? 'textarea' : 'input'
   return (
-    <div className={rootClassName}>
+    <div className={rootClassName} ref={componentRef}>
       <div
         className={classNames(
           classes('label-container'),
@@ -65,6 +66,7 @@ TextField.propTypes = {
   error: PropTypes.bool,
   multiline: PropTypes.bool,
   onChange: PropTypes.func,
+  componentRef: PropTypes.object,
 }
 
 TextField.defaultProps = {
@@ -74,4 +76,6 @@ TextField.defaultProps = {
   multiline: false,
 }
 
-export default TextField
+export default forwardRef((props, ref) => (
+  <TextField {...props} componentRef={ref} />
+))

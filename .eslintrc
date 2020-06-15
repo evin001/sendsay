@@ -17,7 +17,8 @@
     "require-jsdoc": "off",
     "react/prop-types": ["warn", {
       "ignore": ["children"]
-    }]
+    }],
+    "react/display-name": "off"
   },
   "ignorePatterns": ["webpack.config.js"],
   "parser": "babel-eslint"

@@ -11,3 +11,6 @@
     fill: #999999;
     fill-opacity: 1;
 }
+.Splitter_resize {
+    cursor: col-resize;
+}
