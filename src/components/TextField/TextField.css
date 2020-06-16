@@ -4,7 +4,7 @@
     line-height: 20px;
 }
 .TextField-label_error {
-    color: var(--color-error)
+    color: var(--color-error) !important;
 }
 .TextField-tag {
     background: white;

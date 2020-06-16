@@ -14,6 +14,7 @@ const TextField = ({
   optional,
   error,
   multiline,
+  readOnly,
   tagClassName,
   labelClassName,
   labelContainerClassName,
@@ -48,6 +49,7 @@ const TextField = ({
         value={value}
         onChange={onChange}
         autoComplete="off"
+        readOnly={readOnly}
       />
     </div>
   )
@@ -65,6 +67,7 @@ TextField.propTypes = {
   optional: PropTypes.bool,
   error: PropTypes.bool,
   multiline: PropTypes.bool,
+  readOnly: PropTypes.bool,
   onChange: PropTypes.func,
   componentRef: PropTypes.object,
 }
@@ -74,6 +77,7 @@ TextField.defaultProps = {
   optional: false,
   error: false,
   multiline: false,
+  readOnly: false,
 }
 
 export default forwardRef((props, ref) => (

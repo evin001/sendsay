@@ -7,8 +7,9 @@
 .Request-text-field {
     flex: 1;
     width: 100%;
-    /* min-width: 640px;
-    min-height: 520px; */
+    font-size: 14px;
+    line-height: 18px;
+    font-family: "Courier New", Courier, monospace;
 }
 .Request-label {
     font-size: 12px;

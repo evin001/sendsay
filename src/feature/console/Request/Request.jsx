@@ -1,4 +1,5 @@
 import React, { useRef } from 'react'
+import PropTypes from 'prop-types'
 import { cn } from '@bem-react/classname'
 import { useDidMount } from 'beautiful-react-hooks'
 import classNames from 'classnames'
@@ -9,7 +10,7 @@ import './Request.css'
 
 const classes = cn('Request')
 
-const Request = () => {
+const Request = ({ request, onChange }) => {
   const root = useRef()
   const firstPane = useRef()
   const secondPane = useRef()
@@ -45,8 +46,10 @@ const Request = () => {
       <TextField
         ref={firstPane}
         label="Запрос:"
-        value=""
         name="request"
+        value={request.value}
+        error={request.error}
+        onChange={onChange}
         tagClassName={classes('text-field')}
         labelClassName={classes('label')}
         labelContainerClassName={classes('label-container')}
@@ -70,9 +73,18 @@ const Request = () => {
           classes('second-pane')
         )}
         multiline
+        readOnly
       />
     </div>
   )
+}
+
+Request.propTypes = {
+  request: PropTypes.shape({
+    value: PropTypes.string,
+    error: PropTypes.bool,
+  }).isRequired,
+  onChange: PropTypes.func,
 }
 
 export default Request

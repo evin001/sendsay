@@ -1,19 +1,28 @@
 .FormatButton {
     display: flex;
     align-items: center;
-    border: none;
     background: transparent;
+    border-radius: var(--main-border-radius);
     height: 32px;
     font-size: 16px;
+    outline: none;
+    border: 2px solid transparent;
+}
+.FormatButton_active {
     cursor: pointer;
-    outline-color: var(--color-focus);
+}
+.FormatButton_active:focus {
+    border-color: var(--color-focus)
+}
+.FormatButton_active:hover {
+    color: var(--color-select)
+}
+.FormatButton_active:hover path {
+    stroke: var(--color-select)
+}
+.FormatButton_disabled {
+    cursor: not-allowed;
 }
 .FormatButton-label {
     margin-left: 8px;
-}
-.FormatButton:hover {
-    color: var(--color-select)
-}
-.FormatButton:hover path {
-    stroke: var(--color-select)
 }
