@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import { cn } from '@bem-react/classname'
-import { makeRequest } from './consoleSlice'
+import { makeRequest, getHistorySelected } from './consoleSlice'
 import Header from './Header'
 import History from './History'
 import Request from './Request'
@@ -16,9 +16,7 @@ const ConsolePage = () => {
   const dispatch = useDispatch()
   const { historySelected } = useSelector(
     (store) => ({
-      historySelected: store.console.history.find(
-        (item) => item.id === store.console.selected
-      ),
+      historySelected: getHistorySelected(store.console),
     }),
     shallowEqual
   )
@@ -32,6 +30,8 @@ const ConsolePage = () => {
         historySelected.response || historySelected.error
       nextForm.response.error = historySelected.error
       setForm(nextForm)
+    } else {
+      setForm(new ConsoleForm())
     }
   }, [historySelected])
 

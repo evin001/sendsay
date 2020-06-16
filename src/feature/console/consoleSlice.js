@@ -1,6 +1,7 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice, createSelector } from '@reduxjs/toolkit'
 import md5 from 'js-md5'
 import sendsay from '~/app/sendsay'
+import StoreProvider from '~/providers/StoreProvider'
 
 const thunkPrefix = 'console'
 
@@ -17,10 +18,12 @@ export const makeRequest = createAsyncThunk(
   }
 )
 
+const history = StoreProvider.getHistory()
+
 const initialState = {
   loading: false,
-  history: [],
-  selected: '',
+  history,
+  selected: (history[0] && history[0].id) || '',
 }
 
 const consoleSlice = createSlice({
@@ -33,6 +36,7 @@ const consoleSlice = createSlice({
     resetHistory: (state) => {
       if (state.history.length) {
         state.history = []
+        StoreProvider.resetHistory()
       }
     },
   },
@@ -48,6 +52,8 @@ const consoleSlice = createSlice({
         state.history.push(payload)
       }
 
+      StoreProvider.setHistory(state.history)
+
       state.selected = payload.id
       state.loading = false
     }
@@ -62,5 +68,12 @@ const consoleSlice = createSlice({
 })
 
 export const { setSelected, resetHistory } = consoleSlice.actions
+
+export const getHistory = (store) => store.history
+export const getSelected = (store) => store.selected
+export const getHistorySelected = createSelector(
+  [getHistory, getSelected],
+  (history, selected) => history.find((item) => item.id === selected)
+)
 
 export default consoleSlice.reducer
