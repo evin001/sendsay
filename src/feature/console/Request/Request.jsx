@@ -10,7 +10,7 @@ import './Request.css'
 
 const classes = cn('Request')
 
-const Request = ({ request, onChange }) => {
+const Request = ({ request, response, onChange }) => {
   const root = useRef()
   const firstPane = useRef()
   const secondPane = useRef()
@@ -63,7 +63,8 @@ const Request = ({ request, onChange }) => {
       <TextField
         ref={secondPane}
         label="Ответ:"
-        value=""
+        value={response.value}
+        error={response.error}
         name="response"
         tagClassName={classes('text-field')}
         labelClassName={classes('label')}
@@ -84,6 +85,10 @@ Request.propTypes = {
     value: PropTypes.string,
     error: PropTypes.bool,
   }).isRequired,
+  response: PropTypes.shape({
+    value: PropTypes.string,
+    error: PropTypes.bool,
+  }),
   onChange: PropTypes.func,
 }
 

@@ -13,6 +13,7 @@
     "beautiful-react-hooks": "^0.25.2",
     "classnames": "^2.2.6",
     "core-js": "^3.6.5",
+    "js-md5": "^0.7.3",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

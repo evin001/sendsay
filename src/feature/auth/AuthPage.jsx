@@ -6,7 +6,6 @@ import TextField from '~/components/TextField'
 import Button from '~/components/Button'
 import Logo from '~/components/Logo'
 import Alert from '~/components/Alert'
-import Loader from '~/components/Loader'
 import Repo from '~/components/Repo'
 import AuthForm from './AuthForm'
 import './AuthPage.css'
@@ -78,11 +77,12 @@ const AuthPage = () => {
             tagClassName={classes('text-field')}
           />
           <Button
+            loading={loading}
             disabled={form.error}
             onClick={handleSignIn}
             className={classes('sign-in-button')}
           >
-            {loading ? <Loader /> : 'Войти'}
+            Войти
           </Button>
         </div>
         <Repo />

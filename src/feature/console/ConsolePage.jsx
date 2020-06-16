@@ -1,32 +1,54 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import { cn } from '@bem-react/classname'
+import { makeRequest } from './consoleSlice'
 import Header from './Header'
 import History from './History'
 import Request from './Request'
 import Actions from './Actions'
 import ConsoleForm from './ConsoleForm'
+import { formatRequest } from './utils'
 import './ConsolePage.css'
 
 const classes = cn('ConsolePage')
 
 const ConsolePage = () => {
+  const dispatch = useDispatch()
+  const { historySelected } = useSelector(
+    (store) => ({
+      historySelected: store.console.history.find(
+        (item) => item.id === store.console.selected
+      ),
+    }),
+    shallowEqual
+  )
   const [form, setForm] = useState(new ConsoleForm())
 
-  const handleChangeForm = (event) => {
+  useEffect(() => {
+    if (historySelected) {
+      const nextForm = form.clone()
+      nextForm.request.value = historySelected.request
+      nextForm.response.value =
+        historySelected.response || historySelected.error
+      nextForm.response.error = historySelected.error
+      setForm(nextForm)
+    }
+  }, [historySelected])
+
+  const handleChangeRequest = (event) => {
     const nextForm = form.clone()
-    nextForm[event.target.id] = event.target.value
+    nextForm.request.value = event.target.value
     setForm(nextForm)
   }
 
-  const handleFormatRequest = () => {
-    if (!form.error) {
-      handleChangeForm({
-        target: {
-          id: 'request',
-          value: JSON.stringify(JSON.parse(form.request), null, 2),
-        },
-      })
-    }
+  const handleFormat = () => {
+    handleChangeRequest({
+      target: { value: formatRequest(form.request.value) },
+    })
+  }
+
+  const handleRequest = () => {
+    dispatch(makeRequest(formatRequest(form.request.value)))
   }
 
   return (
@@ -34,13 +56,15 @@ const ConsolePage = () => {
       <Header />
       <History />
       <Request
-        request={{
-          value: form.request,
-          error: form.error && Boolean(form.request),
-        }}
-        onChange={handleChangeForm}
+        request={form.request.toObject()}
+        response={form.response.toObject()}
+        onChange={handleChangeRequest}
       />
-      <Actions onFormat={handleFormatRequest} disabled={form.error} />
+      <Actions
+        onRequest={handleRequest}
+        onFormat={handleFormat}
+        disabled={form.request.error}
+      />
     </div>
   )
 }

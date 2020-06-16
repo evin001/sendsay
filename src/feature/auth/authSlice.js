@@ -1,13 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import Sendsay from 'sendsay-api'
 import SessionProvider from '~/providers/SessionProvider'
+import sendsay from '~/app/sendsay'
 
 const thunkPrefix = `auth`
-
-const sendsay = new Sendsay()
-if (SessionProvider.getSession()) {
-  sendsay.setSession(SessionProvider.getSession())
-}
 
 export const signIn = createAsyncThunk(
   `${thunkPrefix}/signIn`,

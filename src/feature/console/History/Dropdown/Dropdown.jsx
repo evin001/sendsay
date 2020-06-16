@@ -7,7 +7,7 @@ import './Dropdown.css'
 
 const classes = cn('Dropdown')
 
-const Dropdown = ({ title, type }) => {
+const Dropdown = ({ title, type, onClick }) => {
   const [open, setOpen] = useState(false)
   const root = useRef()
 
@@ -30,9 +30,11 @@ const Dropdown = ({ title, type }) => {
   })
 
   return (
-    <div className={classes('root', { shadow: open })} ref={root}>
+    <div ref={root} className={classes('root', { shadow: open })}>
       <div className={classes('status', { type })} />
-      <div className={classes('title')}>{title}</div>
+      <div onClick={onClick} className={classes('title')}>
+        {title}
+      </div>
       <div className={classes('dots-container')} onClick={handleToggle}>
         <DotsIcon />
       </div>
@@ -46,6 +48,7 @@ const Dropdown = ({ title, type }) => {
 Dropdown.propTypes = {
   title: PropTypes.string.isRequired,
   type: PropTypes.oneOf(['success', 'error']).isRequired,
+  onClick: PropTypes.func,
 }
 
 export default Dropdown

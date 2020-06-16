@@ -12,6 +12,7 @@
 }
 .Dropdown-title {
     font-size: 16px;
+    cursor: pointer;
 }
 .Dropdown-status {
     border: 1px solid rgba(0, 0, 0, 0.2);
