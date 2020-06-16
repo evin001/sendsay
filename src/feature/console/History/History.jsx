@@ -2,7 +2,7 @@ import React, { useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { cn } from '@bem-react/classname'
 import useHeightScrollBar from '~/hooks/useHeightScrollBar'
-import { setSelected } from '../consoleSlice'
+import { setSelected, resetHistory } from '../consoleSlice'
 import Dropdown from './Dropdown'
 import ResetButton from './ResetButton'
 import './History.css'
@@ -22,6 +22,10 @@ const History = () => {
     dispatch(setSelected(id))
   }
 
+  const handleReset = () => {
+    dispatch(resetHistory())
+  }
+
   return (
     <div className={classes('root')}>
       <div
@@ -38,7 +42,7 @@ const History = () => {
           />
         ))}
       </div>
-      <ResetButton />
+      <ResetButton onClick={handleReset} />
     </div>
   )
 }

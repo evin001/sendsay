@@ -30,6 +30,11 @@ const consoleSlice = createSlice({
     setSelected: (state, { payload }) => {
       state.selected = payload
     },
+    resetHistory: (state) => {
+      if (state.history.length) {
+        state.history = []
+      }
+    },
   },
   extraReducers: (build) => {
     function updateHistory(state, { payload }) {
@@ -56,6 +61,6 @@ const consoleSlice = createSlice({
   },
 })
 
-export const { setSelected } = consoleSlice.actions
+export const { setSelected, resetHistory } = consoleSlice.actions
 
 export default consoleSlice.reducer
