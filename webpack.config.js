@@ -42,7 +42,7 @@ module.exports = {
   ...(!prod
     ? {
       devServer: {
-        port: 8080,
+        port: 3000,
         open: false,
         hot: true,
         compress: true,
