@@ -6,6 +6,8 @@ import { formatRequest } from './utils'
 
 const thunkPrefix = 'console'
 
+const HISTORY_LIMIT = 15
+
 export const makeRequest = createAsyncThunk(
   `${thunkPrefix}/makeRequest`,
   async (request, { rejectWithValue }) => {
@@ -51,8 +53,19 @@ const consoleSlice = createSlice({
   },
   extraReducers: (build) => {
     function updateHistory(state, { payload }) {
+      if (state.ids.length === HISTORY_LIMIT) {
+        const lastId = state.ids.pop()
+        delete state.history[lastId]
+      }
+
       if (!state.history[payload.id]) {
         state.ids.unshift(payload.id)
+      } else {
+        const movedIndex = state.ids.indexOf(payload.id)
+        if (~movedIndex) {
+          state.ids.splice(movedIndex, 1)
+          state.ids.unshift(payload.id)
+        }
       }
       state.history[payload.id] = payload
 
