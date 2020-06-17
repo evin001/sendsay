@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice, createSelector } from '@reduxjs/toolkit'
 import md5 from 'js-md5'
 import sendsay from '~/app/sendsay'
 import StoreProvider from '~/providers/StoreProvider'
+import { formatRequest } from './utils'
 
 const thunkPrefix = 'console'
 
@@ -11,9 +12,13 @@ export const makeRequest = createAsyncThunk(
     const id = md5(request)
     try {
       const response = await sendsay.request(JSON.parse(request))
-      return { id, request, response }
+      return { id, request, response: formatRequest(response, false) }
     } catch (error) {
-      return rejectWithValue({ id, request, error })
+      return rejectWithValue({
+        id,
+        request,
+        error: formatRequest(error, false),
+      })
     }
   }
 )

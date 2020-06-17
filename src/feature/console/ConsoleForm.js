@@ -39,20 +39,12 @@ class RequestField {
 }
 
 class ResponseField {
-  #value
+  value
   #error
 
   constructor(value = '', error = false) {
-    this.#value = value
+    this.value = value
     this.#error = error
-  }
-
-  get value() {
-    return this.#value
-  }
-
-  set value(value) {
-    this.#value = formatRequest(value, false)
   }
 
   set error(value) {
@@ -60,12 +52,12 @@ class ResponseField {
   }
 
   clone() {
-    return new ResponseField(this.#value, this.#error)
+    return new ResponseField(this.value, this.#error)
   }
 
   toObject() {
     return {
-      value: this.#value,
+      value: this.value,
       error: this.#error,
     }
   }
