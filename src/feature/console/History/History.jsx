@@ -8,6 +8,7 @@ import {
   deleteHistory,
   requestById,
 } from '../consoleSlice'
+import { copyToClipboard } from '../utils'
 import Dropdown from './Dropdown'
 import ResetButton from './ResetButton'
 import './History.css'
@@ -40,6 +41,12 @@ const History = () => {
     dispatch(requestById(id))
   }
 
+  const handleCopy = (id) => () => {
+    if (copyToClipboard(history[id].request)) {
+      console.log('copy!')
+    }
+  }
+
   return (
     <div className={classes('root')}>
       <div
@@ -55,6 +62,7 @@ const History = () => {
             onSelect={handleSelected(id)}
             onDelete={handleDelete(id)}
             onMake={handleMake(id)}
+            onCopy={handleCopy(id)}
           />
         ))}
       </div>
