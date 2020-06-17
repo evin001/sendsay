@@ -25,6 +25,16 @@ export const makeRequest = createAsyncThunk(
   }
 )
 
+export const requestById = createAsyncThunk(
+  `${thunkPrefix}/requestById`,
+  (id, { getState, dispatch }) => {
+    const {
+      console: { history },
+    } = getState()
+    dispatch(makeRequest(history[id].request))
+  }
+)
+
 const history = StoreProvider.getHistory()
 const ids = StoreProvider.getHistoryIds()
 
