@@ -43,7 +43,7 @@ const consoleSlice = createSlice({
       state.selected = payload
     },
     resetHistory: (state) => {
-      if (state.history.length) {
+      if (state.ids.length) {
         state.history = {}
         state.ids = []
         state.selected = ''

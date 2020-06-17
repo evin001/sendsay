@@ -11,13 +11,6 @@ const Dropdown = ({ title, type, onSelect, onDelete, onMake, onCopy }) => {
   const [open, setOpen] = useState(false)
   const root = useRef()
 
-  const handleToggle = () => setOpen(!open)
-  const handleScroll = () => {
-    if (open) {
-      setOpen(false)
-    }
-  }
-
   useEffect(() => {
     if (root.current) {
       root.current.parentNode.addEventListener('scroll', handleScroll)
@@ -28,6 +21,19 @@ const Dropdown = ({ title, type, onSelect, onDelete, onMake, onCopy }) => {
       }
     }
   })
+
+  const handleToggle = () => setOpen(!open)
+
+  const handleScroll = () => {
+    if (open) {
+      setOpen(false)
+    }
+  }
+
+  const handleAction = (callback) => () => {
+    handleToggle()
+    if (callback) callback()
+  }
 
   return (
     <div ref={root} className={classes('root', { shadow: open })}>
@@ -42,9 +48,9 @@ const Dropdown = ({ title, type, onSelect, onDelete, onMake, onCopy }) => {
         <ItemPortal
           parent={root.current}
           onClickOutside={handleToggle}
-          onDelete={onDelete}
-          onMake={onMake}
-          onCopy={onSelect}
+          onDelete={handleAction(onDelete)}
+          onMake={handleAction(onMake)}
+          onCopy={handleAction(onCopy)}
         />
       )}
     </div>
