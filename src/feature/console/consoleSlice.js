@@ -49,7 +49,7 @@ const consoleSlice = createSlice({
       if (~historyIndex) {
         state.history[historyIndex] = payload
       } else {
-        state.history.push(payload)
+        state.history.unshift(payload)
       }
 
       StoreProvider.setHistory(state.history)
