@@ -12,8 +12,9 @@ const classes = cn('History')
 const History = () => {
   const dropdowns = useRef()
   const dispatch = useDispatch()
-  const { history } = useSelector((store) => ({
+  const { history, ids } = useSelector((store) => ({
     history: store.console.history,
+    ids: store.console.ids,
   }))
 
   const height = useHeightScrollBar(dropdowns)
@@ -33,12 +34,12 @@ const History = () => {
         className={classes('dropdown-container')}
         style={height ? { height: `${height}px` } : {}}
       >
-        {history.map((item) => (
+        {ids.map((id) => (
           <Dropdown
-            key={item.id}
-            type={item.response ? 'success' : 'error'}
-            title={JSON.parse(item.request).action || '???'}
-            onClick={handleSelected(item.id)}
+            key={id}
+            type={history[id].response ? 'success' : 'error'}
+            title={JSON.parse(history[id].request).action || '???'}
+            onClick={handleSelected(id)}
           />
         ))}
       </div>

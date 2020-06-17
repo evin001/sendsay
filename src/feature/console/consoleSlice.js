@@ -19,11 +19,13 @@ export const makeRequest = createAsyncThunk(
 )
 
 const history = StoreProvider.getHistory()
+const ids = StoreProvider.getHistoryIds()
 
 const initialState = {
   loading: false,
   history,
-  selected: (history[0] && history[0].id) || '',
+  ids,
+  selected: ids[0] || '',
 }
 
 const consoleSlice = createSlice({
@@ -35,24 +37,22 @@ const consoleSlice = createSlice({
     },
     resetHistory: (state) => {
       if (state.history.length) {
-        state.history = []
+        state.history = {}
+        state.ids = []
+        state.selected = ''
         StoreProvider.resetHistory()
       }
     },
   },
   extraReducers: (build) => {
     function updateHistory(state, { payload }) {
-      const historyIndex = state.history.findIndex(
-        (item) => item.id === payload.id
-      )
-
-      if (~historyIndex) {
-        state.history[historyIndex] = payload
-      } else {
-        state.history.unshift(payload)
+      if (!state.history[payload.id]) {
+        state.ids.unshift(payload.id)
       }
+      state.history[payload.id] = payload
 
       StoreProvider.setHistory(state.history)
+      StoreProvider.setHistoryIds(state.ids)
 
       state.selected = payload.id
       state.loading = false
@@ -73,7 +73,7 @@ export const getHistory = (store) => store.history
 export const getSelected = (store) => store.selected
 export const getHistorySelected = createSelector(
   [getHistory, getSelected],
-  (history, selected) => history.find((item) => item.id === selected)
+  (history, selected) => history[selected]
 )
 
 export default consoleSlice.reducer
