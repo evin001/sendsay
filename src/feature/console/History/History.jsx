@@ -17,7 +17,7 @@ const History = () => {
     ids: store.console.ids,
   }))
 
-  const height = useHeightScrollBar(dropdowns)
+  const height = useHeightScrollBar(dropdowns, ids.length)
 
   const handleSelected = (id) => () => {
     dispatch(setSelected(id))

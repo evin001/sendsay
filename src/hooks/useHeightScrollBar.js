@@ -1,7 +1,7 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useDidMount, useWindowResize } from 'beautiful-react-hooks'
 
-const useHeightScrollBar = (ref) => {
+const useHeightScrollBar = (ref, memoize) => {
   const [height, setHeight] = useState({ value: 0, init: 0 })
 
   const handleWindowResize = () => {
@@ -34,6 +34,10 @@ const useHeightScrollBar = (ref) => {
       setHeight({ value: getHeight(el), init: getHeight(el) })
     }
   })
+
+  useEffect(() => {
+    handleWindowResize()
+  }, [memoize])
 
   useWindowResize(handleWindowResize)
 
