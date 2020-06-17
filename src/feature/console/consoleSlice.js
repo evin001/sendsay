@@ -50,6 +50,15 @@ const consoleSlice = createSlice({
         StoreProvider.resetHistory()
       }
     },
+    deleteHistory: (state, { payload }) => {
+      state.ids.splice(state.ids.indexOf(payload), 1)
+      delete state.history[payload]
+      if (payload === state.selected) {
+        state.selected = state.ids[0] || ''
+      }
+      StoreProvider.setHistory(state.history)
+      StoreProvider.setHistoryIds(state.ids)
+    },
   },
   extraReducers: (build) => {
     function updateHistory(state, { payload }) {
@@ -58,15 +67,10 @@ const consoleSlice = createSlice({
         delete state.history[lastId]
       }
 
-      if (!state.history[payload.id]) {
-        state.ids.unshift(payload.id)
-      } else {
-        const movedIndex = state.ids.indexOf(payload.id)
-        if (~movedIndex) {
-          state.ids.splice(movedIndex, 1)
-          state.ids.unshift(payload.id)
-        }
+      if (state.history[payload.id]) {
+        state.ids.splice(state.ids.indexOf(payload.id), 1)
       }
+      state.ids.unshift(payload.id)
       state.history[payload.id] = payload
 
       StoreProvider.setHistory(state.history)
@@ -85,7 +89,7 @@ const consoleSlice = createSlice({
   },
 })
 
-export const { setSelected, resetHistory } = consoleSlice.actions
+export const { setSelected, resetHistory, deleteHistory } = consoleSlice.actions
 
 export const getHistory = (store) => store.history
 export const getSelected = (store) => store.selected

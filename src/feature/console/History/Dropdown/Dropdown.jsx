@@ -7,7 +7,7 @@ import './Dropdown.css'
 
 const classes = cn('Dropdown')
 
-const Dropdown = ({ title, type, onClick }) => {
+const Dropdown = ({ title, type, onSelect, onDelete, onMake, onCopy }) => {
   const [open, setOpen] = useState(false)
   const root = useRef()
 
@@ -32,14 +32,20 @@ const Dropdown = ({ title, type, onClick }) => {
   return (
     <div ref={root} className={classes('root', { shadow: open })}>
       <div className={classes('status', { type })} />
-      <div onClick={onClick} className={classes('title')}>
+      <div onClick={onSelect} className={classes('title')}>
         {title}
       </div>
       <div className={classes('dots-container')} onClick={handleToggle}>
         <DotsIcon />
       </div>
       {open && (
-        <ItemPortal parent={root.current} onClickOutside={handleToggle} />
+        <ItemPortal
+          parent={root.current}
+          onClickOutside={handleToggle}
+          onDelete={onDelete}
+          onMake={onMake}
+          onCopy={onSelect}
+        />
       )}
     </div>
   )
@@ -48,7 +54,10 @@ const Dropdown = ({ title, type, onClick }) => {
 Dropdown.propTypes = {
   title: PropTypes.string.isRequired,
   type: PropTypes.oneOf(['success', 'error']).isRequired,
-  onClick: PropTypes.func,
+  onSelect: PropTypes.func,
+  onDelete: PropTypes.func,
+  onMake: PropTypes.func,
+  onCopy: PropTypes.func,
 }
 
 export default Dropdown
