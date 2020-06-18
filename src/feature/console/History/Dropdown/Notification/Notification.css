@@ -1,0 +1,23 @@
+.Notification-root {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 25px;
+    background: #F6F6F6;
+    border-radius: 5px;
+    height: 20px;
+    width: 89px;
+    font-size: 12px;
+    animation: Notification-out 1.25s ease-out forwards;
+}
+@keyframes Notification-out {
+    from {
+        opacity: 1;
+        top: 5px
+    }
+    to {
+        opacity: 0;
+        top: -20px;
+    }
+}

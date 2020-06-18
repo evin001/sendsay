@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { cn } from '@bem-react/classname'
 import useHeightScrollBar from '~/hooks/useHeightScrollBar'
@@ -17,6 +17,7 @@ const classes = cn('History')
 
 const History = () => {
   const dropdowns = useRef()
+  const [notify, setNotify] = useState('')
   const dispatch = useDispatch()
   const { history, ids } = useSelector((store) => ({
     history: store.console.history,
@@ -43,9 +44,11 @@ const History = () => {
 
   const handleCopy = (id) => () => {
     if (copyToClipboard(history[id].request)) {
-      console.log('copy!')
+      setNotify(id)
     }
   }
+
+  const handleResetNotify = () => setNotify('')
 
   return (
     <div className={classes('root')}>
@@ -63,6 +66,8 @@ const History = () => {
             onDelete={handleDelete(id)}
             onMake={handleMake(id)}
             onCopy={handleCopy(id)}
+            notify={notify === id}
+            onNotify={handleResetNotify}
           />
         ))}
       </div>

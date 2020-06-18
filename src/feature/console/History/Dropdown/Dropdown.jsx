@@ -3,11 +3,21 @@ import PropTypes from 'prop-types'
 import { cn } from '@bem-react/classname'
 import DotsIcon from '~/components/Dots'
 import ItemPortal from './ItemPortal'
+import Notification from './Notification'
 import './Dropdown.css'
 
 const classes = cn('Dropdown')
 
-const Dropdown = ({ title, type, onSelect, onDelete, onMake, onCopy }) => {
+const Dropdown = ({
+  title,
+  type,
+  notify,
+  onNotify,
+  onSelect,
+  onDelete,
+  onMake,
+  onCopy,
+}) => {
   const [open, setOpen] = useState(false)
   const root = useRef()
 
@@ -38,6 +48,9 @@ const Dropdown = ({ title, type, onSelect, onDelete, onMake, onCopy }) => {
   return (
     <div ref={root} className={classes('root', { shadow: open })}>
       <div className={classes('status', { type })} />
+      {notify && (
+        <Notification message="Скопировано" onAnimationEnd={onNotify} />
+      )}
       <div onClick={onSelect} className={classes('title')}>
         {title}
       </div>
@@ -64,6 +77,8 @@ Dropdown.propTypes = {
   onDelete: PropTypes.func,
   onMake: PropTypes.func,
   onCopy: PropTypes.func,
+  notify: PropTypes.bool,
+  onNotify: PropTypes.func,
 }
 
 export default Dropdown
