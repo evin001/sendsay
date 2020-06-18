@@ -2,9 +2,12 @@
     cursor: pointer;
     padding: 7px;
     line-height: 0;
+    border: 2px solid transparent;
+    border-radius: var(--main-border-radius);
+    outline: none;
 }
 .FullscreenButton-root:focus {
-    outline-color: var(--color-focus);
+    border-color: var(--color-focus);
 }
 .FullscreenButton-root:hover path {
     stroke: #0055FB;

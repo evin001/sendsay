@@ -1,5 +1,8 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const TerserJSPlugin = require('terser-webpack-plugin')
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const prod = process.env.NODE_ENV === 'production'
 
 module.exports = {
@@ -25,7 +28,10 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        use: [
+          prod ? MiniCssExtractPlugin.loader : 'style-loader',
+          'css-loader',
+        ],
       },
       {
         test: /\.((woff(2)?)|ttf|eot|otf)(\?[a-z0-9#=&.]+)?$/,
@@ -38,6 +44,7 @@ module.exports = {
       title: "Senday console",
       template: 'src/index.html',
     }),
+    new MiniCssExtractPlugin({ filename: 'app.css' }),
   ],
   ...(!prod
     ? {
@@ -51,5 +58,12 @@ module.exports = {
         historyApiFallback: true
       },
     }
-    : {}),
+    : {
+      optimization: {
+        minimizer: [
+          new TerserJSPlugin({}),
+          new OptimizeCSSAssetsPlugin({}),
+        ],
+      },
+    }),
 }
