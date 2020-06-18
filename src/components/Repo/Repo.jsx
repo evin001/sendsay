@@ -7,8 +7,8 @@ const appClasses = cn('App')
 
 const Repo = () => (
   <div className={appClasses({ text: 'center' })}>
-    <a href="#" className={classes('link')}>
-      @link-to-your-github
+    <a href="https://github.com/evin001/sendsay" className={classes('link')}>
+      @evin001
     </a>
   </div>
 )
